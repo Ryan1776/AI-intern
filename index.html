@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intern Roadmap 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d0d12;
+  --paper: #f5f2eb;
+  --paper2: #ede9df;
+  --card: #ffffff;
+  --rule: #d4cfc4;
+  --muted: #8a8478;
+  --deep: #1a1714;
+  --phase1-light: #e8f2ec; --phase1-mid: #2d6b47; --phase1-accent: #4caf7d;
+  --phase2-light: #e8eef6; --phase2-mid: #2a5298; --phase2-accent: #5b8dee;
+  --phase3-light: #fdf3e7; --phase3-mid: #b45309; --phase3-accent: #f59e0b;
+  --phase4-light: #f3eef8; --phase4-mid: #7c3aed; --phase4-accent: #a855f7;
+  --phase5-light: #eeeeff; --phase5-mid: #3730a3; --phase5-accent: #6366f1;
+  --phase6-light: #fdf0ef; --phase6-mid: #dc2626; --phase6-accent: #f87171;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.6;min-height:100vh;}
+.page{max-width:980px;margin:0 auto;padding:0 28px 120px;}
+
+/* MASTHEAD */
+.masthead{padding:80px 0 64px;border-bottom:1.5px solid var(--rule);margin-bottom:72px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;animation:riseIn 0.9s cubic-bezier(0.16,1,0.3,1) both;}
+.issue-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:10px;}
+.issue-tag::before{content:'';display:inline-block;width:28px;height:1px;background:var(--muted);}
+.masthead-title{font-family:'Playfair Display',serif;font-size:clamp(52px,8vw,96px);font-weight:900;line-height:0.92;letter-spacing:-3px;color:var(--deep);}
+.masthead-title em{font-style:italic;font-weight:700;color:var(--muted);}
+.masthead-subtitle{margin-top:28px;font-size:15.5px;color:var(--muted);max-width:460px;line-height:1.7;font-weight:300;}
+.stats-block{display:flex;flex-direction:column;gap:20px;align-items:flex-end;}
+.stat{text-align:right;}
+.stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;line-height:1;color:var(--deep);letter-spacing:-1.5px;}
+.stat-label{font-size:11px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-top:3px;}
+.masthead-divider{width:1px;height:80px;background:var(--rule);align-self:center;margin:0 4px;}
+
+/* SECTION LABEL */
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:40px;display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--rule);}
+.section-label::after{content:'';flex:1;height:1px;background:var(--rule);}
+
+/* TIMELINE BAR */
+.timeline-bar{padding:36px 36px 32px;border:1.5px solid var(--rule);border-radius:4px;background:var(--card);animation:riseIn 0.8s 0.15s cubic-bezier(0.16,1,0.3,1) both;}
+.tl-label{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;}
+.tl-track{display:flex;height:36px;border-radius:3px;overflow:hidden;margin-bottom:16px;gap:2px;}
+.tl-seg{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;letter-spacing:0.05em;color:rgba(255,255,255,0.9);flex:3;transition:opacity 0.2s;cursor:default;}
+.tl-seg:hover{opacity:0.82;}
+.tl-seg-1{background:var(--phase1-mid);border-radius:3px 0 0 3px;}
+.tl-seg-2{background:var(--phase2-mid);}
+.tl-seg-3{background:var(--phase3-mid);}
+.tl-seg-4{background:var(--phase4-mid);}
+.tl-seg-5{background:var(--phase5-mid);}
+.tl-seg-6{background:var(--phase6-mid);border-radius:0 3px 3px 0;}
+.tl-weeks{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+
+/* PHASE CARDS */
+.phases{display:flex;flex-direction:column;gap:48px;}
+.phase-card{display:grid;grid-template-columns:200px 1fr;border:1.5px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--card);opacity:0;transform:translateY(18px);transition:box-shadow 0.3s;}
+.phase-card.visible{animation:cardIn 0.65s cubic-bezier(0.16,1,0.3,1) forwards;}
+.phase-card:hover{box-shadow:0 8px 40px rgba(0,0,0,0.09);}
+
+/* Sidebar */
+.phase-sidebar{padding:36px 28px;display:flex;flex-direction:column;justify-content:space-between;border-right:1.5px solid var(--rule);position:relative;overflow:hidden;}
+.phase-card:nth-child(1) .phase-sidebar{background:var(--phase1-light);}
+.phase-card:nth-child(2) .phase-sidebar{background:var(--phase2-light);}
+.phase-card:nth-child(3) .phase-sidebar{background:var(--phase3-light);}
+.phase-card:nth-child(4) .phase-sidebar{background:var(--phase4-light);}
+.phase-card:nth-child(5) .phase-sidebar{background:var(--phase5-light);}
+.phase-card:nth-child(6) .phase-sidebar{background:var(--phase6-light);}
+.phase-num-large{font-family:'Playfair Display',serif;font-size:88px;font-weight:900;line-height:1;opacity:0.07;position:absolute;bottom:-10px;right:-4px;letter-spacing:-4px;pointer-events:none;}
+.phase-card:nth-child(1) .phase-num-large{color:var(--phase1-mid);}
+.phase-card:nth-child(2) .phase-num-large{color:var(--phase2-mid);}
+.phase-card:nth-child(3) .phase-num-large{color:var(--phase3-mid);}
+.phase-card:nth-child(4) .phase-num-large{color:var(--phase4-mid);}
+.phase-card:nth-child(5) .phase-num-large{color:var(--phase5-mid);}
+.phase-card:nth-child(6) .phase-num-large{color:var(--phase6-mid);}
+.phase-pill{display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.15em;text-transform:uppercase;padding:5px 10px;border-radius:3px;font-weight:500;align-self:flex-start;margin-bottom:20px;}
+.phase-card:nth-child(1) .phase-pill{background:rgba(45,107,71,0.1);color:var(--phase1-mid);}
+.phase-card:nth-child(2) .phase-pill{background:rgba(42,82,152,0.1);color:var(--phase2-mid);}
+.phase-card:nth-child(3) .phase-pill{background:rgba(180,83,9,0.1);color:var(--phase3-mid);}
+.phase-card:nth-child(4) .phase-pill{background:rgba(124,58,237,0.1);color:var(--phase4-mid);}
+.phase-card:nth-child(5) .phase-pill{background:rgba(55,48,163,0.1);color:var(--phase5-mid);}
+.phase-card:nth-child(6) .phase-pill{background:rgba(220,38,38,0.1);color:var(--phase6-mid);}
+.phase-title-side{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;line-height:1.25;letter-spacing:-0.3px;color:var(--deep);margin-bottom:8px;}
+.phase-weeks{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:10px;}
+.phase-difficulty{display:flex;gap:3px;margin-top:16px;}
+.diff-dot{width:6px;height:6px;border-radius:50%;background:var(--rule);}
+.phase-card:nth-child(1) .diff-dot.on{background:var(--phase1-accent);}
+.phase-card:nth-child(2) .diff-dot.on{background:var(--phase2-accent);}
+.phase-card:nth-child(3) .diff-dot.on{background:var(--phase3-accent);}
+.phase-card:nth-child(4) .diff-dot.on{background:var(--phase4-accent);}
+.phase-card:nth-child(5) .diff-dot.on{background:var(--phase5-accent);}
+.phase-card:nth-child(6) .diff-dot.on{background:var(--phase6-accent);}
+
+/* Main content */
+.phase-main{padding:32px 36px 36px;}
+.phase-desc{font-size:14.5px;color:#444;line-height:1.75;margin-bottom:28px;font-weight:300;border-left:2px solid;padding-left:16px;}
+.phase-card:nth-child(1) .phase-desc{border-color:var(--phase1-accent);}
+.phase-card:nth-child(2) .phase-desc{border-color:var(--phase2-accent);}
+.phase-card:nth-child(3) .phase-desc{border-color:var(--phase3-accent);}
+.phase-card:nth-child(4) .phase-desc{border-color:var(--phase4-accent);}
+.phase-card:nth-child(5) .phase-desc{border-color:var(--phase5-accent);}
+.phase-card:nth-child(6) .phase-desc{border-color:var(--phase6-accent);}
+.topics-header{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.topics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;}
+.topic-row{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;transition:border-color 0.2s;}
+.topic-row:hover{border-color:#b0aa9e;}
+.topic-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+.topic-name{font-size:13px;font-weight:600;color:var(--deep);margin-bottom:3px;letter-spacing:-0.1px;}
+.topic-sub{font-size:11.5px;color:var(--muted);line-height:1.45;font-weight:300;}
+.resources-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px;}
+.resource-chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:4px 10px;border-radius:3px;border:1px solid var(--rule);color:#555;background:var(--paper2);display:flex;align-items:center;gap:5px;transition:border-color 0.2s;}
+.resource-chip:hover{border-color:#999;}
+.rtype{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;}
+.tools-section{margin-bottom:22px;}
+.tools-flex{display:flex;flex-wrap:wrap;gap:6px;}
+.tool-badge{font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:5px 11px;border-radius:3px;font-weight:500;}
+.phase-card:nth-child(1) .tool-badge{background:rgba(76,175,125,0.12);color:var(--phase1-mid);border:1px solid rgba(76,175,125,0.2);}
+.phase-card:nth-child(2) .tool-badge{background:rgba(91,141,238,0.12);color:var(--phase2-mid);border:1px solid rgba(91,141,238,0.2);}
+.phase-card:nth-child(3) .tool-badge{background:rgba(245,158,11,0.12);color:var(--phase3-mid);border:1px solid rgba(245,158,11,0.2);}
+.phase-card:nth-child(4) .tool-badge{background:rgba(168,85,247,0.12);color:var(--phase4-mid);border:1px solid rgba(168,85,247,0.2);}
+.phase-card:nth-child(5) .tool-badge{background:rgba(99,102,241,0.12);color:var(--phase5-mid);border:1px solid rgba(99,102,241,0.2);}
+.phase-card:nth-child(6) .tool-badge{background:rgba(248,113,113,0.12);color:var(--phase6-mid);border:1px solid rgba(248,113,113,0.2);}
+.deliverables{display:flex;flex-wrap:wrap;gap:8px;padding-top:20px;border-top:1px solid var(--rule);}
+.deliverable{font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;display:flex;align-items:center;gap:6px;}
+.deliverable::before{content:'→';font-size:10px;opacity:0.6;}
+.phase-card:nth-child(1) .deliverable{background:var(--phase1-light);color:var(--phase1-mid);border:1px solid rgba(76,175,125,0.2);}
+.phase-card:nth-child(2) .deliverable{background:var(--phase2-light);color:var(--phase2-mid);border:1px solid rgba(91,141,238,0.2);}
+.phase-card:nth-child(3) .deliverable{background:var(--phase3-light);color:var(--phase3-mid);border:1px solid rgba(245,158,11,0.2);}
+.phase-card:nth-child(4) .deliverable{background:var(--phase4-light);color:var(--phase4-mid);border:1px solid rgba(168,85,247,0.2);}
+.phase-card:nth-child(5) .deliverable{background:var(--phase5-light);color:var(--phase5-mid);border:1px solid rgba(99,102,241,0.2);}
+.phase-card:nth-child(6) .deliverable{background:var(--phase6-light);color:var(--phase6-mid);border:1px solid rgba(248,113,113,0.2);}
+.connector{display:flex;align-items:center;justify-content:center;height:32px;position:relative;}
+.connector::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rule);transform:translateX(-50%);}
+.connector-dot{width:8px;height:8px;background:var(--paper);border:1.5px solid var(--muted);border-radius:50%;z-index:1;}
+
+/* PRINCIPLES */
+.principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--rule);border:1.5px solid var(--rule);border-radius:4px;overflow:hidden;}
+.principle{background:var(--card);padding:28px 24px;transition:background 0.2s;}
+.principle:hover{background:var(--paper2);}
+.prin-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.15em;margin-bottom:12px;}
+.prin-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--deep);margin-bottom:8px;letter-spacing:-0.3px;}
+.prin-body{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300;}
+
+/* FOOTER */
+.footer{margin-top:80px;padding-top:28px;border-top:1.5px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-left{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;}
+.footer-right{font-size:12px;color:var(--muted);font-weight:300;}
+
+/* ANIMATIONS */
+@keyframes riseIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:700px){
+  .masthead{grid-template-columns:1fr;}
+  .masthead-right{display:none;}
+  .phase-card{grid-template-columns:1fr;}
+  .phase-sidebar{border-right:none;border-bottom:1.5px solid var(--rule);padding:24px 24px 20px;}
+  .phase-num-large{display:none;}
+  .phase-main{padding:24px;}
+  .topics-grid{grid-template-columns:1fr;}
+  .principles-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-left">
+    <div class="issue-tag">Complete Learning Path · 2025 Edition</div>
+    <h1 class="masthead-title">AI Intern<br><em>Roadmap</em></h1>
+    <p class="masthead-subtitle">A rigorous, structured path from foundational concepts to production-ready AI engineering — covering math, deep learning, LLMs, deployment, agents, and everything in between.</p>
+  </div>
+  <div class="masthead-right">
+    <div class="stats-block">
+      <div class="stat"><div class="stat-num">18</div><div class="stat-label">Weeks</div></div>
+      <div class="masthead-divider"></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Phases</div></div>
+      <div class="masthead-divider"></div>
+      <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Tools</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE BAR -->
+<div class="timeline-bar">
+  <div class="tl-label">18-week overview</div>
+  <div class="tl-track">
+    <div class="tl-seg tl-seg-1">Foundations</div>
+    <div class="tl-seg tl-seg-2">Deep Learning</div>
+    <div class="tl-seg tl-seg-3">LLMs & GenAI</div>
+    <div class="tl-seg tl-seg-4">MLOps</div>
+    <div class="tl-seg tl-seg-5">Agents</div>
+    <div class="tl-seg tl-seg-6">Capstone</div>
+  </div>
+  <div class="tl-weeks"><span>Week 1</span><span>Week 4</span><span>Week 7</span><span>Week 10</span><span>Week 13</span><span>Week 16</span><span>Week 18</span></div>
+</div>
+
+<!-- PHASES -->
+<div style="margin-top:72px;">
+<div class="section-label">Learning Phases</div>
+<div class="phases">
+
+<!-- PHASE 1 -->
+<div class="phase-card">
+  <div class="phase-sidebar">
+    <div>
+      <div class="phase-pill">Phase 01</div>
+      <div class="phase-title-side">Python, Math & ML Foundations</div>
+      <div class="phase-weeks">Weeks 1 – 3</div>
+      <div class="phase-difficulty">
+        <div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div>
+      </div>
+    </div>
+    <div class="phase-num-large">1</div>
+  </div>
+  <div class="phase-main">
+    <p class="phase-desc">Everything downstream depends on this. Build genuine fluency in Python and the math that underlies all ML — not just enough to run a notebook, but enough to read a paper and understand why an algorithm works. Shortcuts here compound into confusion later.</p>
+    <div class="topics-header">Core Topics</div>
+    <div class="topics-grid">
+      <div class="topic-row"><span class="topic-icon">🧮</span><div><div class="topic-name">Linear Algebra</div><div class="topic-sub">Vectors, matrices, eigenvalues, SVD — the backbone of every model weight and embedding</div></div></div>
+      <div class="topic-row"><span class="topic-icon">∂</span><div><div class="topic-name">Calculus & Optimization</div><div class="topic-sub">Gradients, chain rule, partial derivatives, gradient descent and its variants (SGD, Adam)</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🎲</span><div><div class="topic-name">Probability & Statistics</div><div class="topic-sub">Distributions, Bayes' theorem, MLE, expectation — essential for understanding model outputs</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🐍</span><div><div class="topic-name">Python for Data Science</div><div class="topic-sub">NumPy, Pandas, Matplotlib/Seaborn — manipulation, EDA, clean visualization workflows</div></div></div>
+      <div class="topic-row"><span class="topic-icon">📊</span><div><div class="topic-name">Classical ML Algorithms</div><div class="topic-sub">Linear/logistic regression, decision trees, SVMs, k-NN, random forests, gradient boosting</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🔬</span><div><div class="topic-name">Model Evaluation</div><div class="topic-sub">k-fold cross-validation, bias-variance tradeoff, precision/recall, ROC-AUC, calibration</div></div></div>
+    </div>
+    <div class="topics-header">Tools & Libraries</div>
+    <div class="tools-section"><div class="tools-flex">
+      <span class="tool-badge">Python 3.11+</span><span class="tool-badge">NumPy</span><span class="tool-badge">Pandas</span><span class="tool-badge">Scikit-learn</span><span class="tool-badge">Matplotlib</span><span class="tool-badge">Seaborn</span><span class="tool-badge">Jupyter</span><span class="tool-badge">Git & GitHub</span>
+    </div></div>
+    <div class="topics-header">Recommended Resources</div>
+    <div class="resources-row">
+      <span class="resource-chip"><span class="rtype">Book</span> Python ML — Sebastian Raschka</span>
+      <span class="resource-chip"><span class="rtype">Course</span> fast.ai Practical ML</span>
+      <span class="resource-chip"><span class="rtype">Video</span> 3Blue1Brown: Essence of Linear Algebra</span>
+      <span class="resource-chip"><span class="rtype">Practice</span> Kaggle Learn + competitions</span>
+    </div>
+    <div class="deliverables">
+      <span class="deliverable">Kaggle Titanic & Housing Price submissions</span>
+      <span class="deliverable">Annotated ML algorithm notebook</span>
+      <span class="deliverable">Clean GitHub repo established</span>
+    </div>
+  </div>
+</div>
+
+<div class="connector"><div class="connector-dot"></div></div>
+
+<!-- PHASE 2 -->
+<div class="phase-card">
+  <div class="phase-sidebar">
+    <div>
+      <div class="phase-pill">Phase 02</div>
+      <div class="phase-title-side">Neural Networks & Deep Learning</div>
+      <div class="phase-weeks">Weeks 4 – 6</div>
+      <div class="phase-difficulty">
+        <div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot"></div><div class="diff-dot"></div>
+      </div>
+    </div>
+    <div class="phase-num-large">2</div>
+  </div>
+  <div class="phase-main">
+    <p class="phase-desc">Implement a neural network from scratch before touching PyTorch — it forces genuine understanding of backpropagation. Then master CNNs, RNNs, and the Transformer architecture that underpins every major modern AI system.</p>
+    <div class="topics-header">Core Topics</div>
+    <div class="topics-grid">
+      <div class="topic-row"><span class="topic-icon">⚡</span><div><div class="topic-name">Backpropagation</div><div class="topic-sub">Derive gradients by hand, implement from scratch in NumPy — build Karpathy's micrograd</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🔥</span><div><div class="topic-name">PyTorch Fundamentals</div><div class="topic-sub">Tensors, autograd engine, nn.Module, custom DataLoaders, training/validation loops</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🖼️</span><div><div class="topic-name">Convolutional Networks</div><div class="topic-sub">Conv/pooling layers, ResNet, EfficientNet — transfer learning on custom image datasets</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🔄</span><div><div class="topic-name">Sequence Models</div><div class="topic-sub">RNN, LSTM, GRU — vanishing gradients, gating mechanisms, when to use what</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🎯</span><div><div class="topic-name">Attention & Transformers</div><div class="topic-sub">Scaled dot-product attention, multi-head attention, positional encoding, encoder-decoder</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🛠️</span><div><div class="topic-name">Training Techniques</div><div class="topic-sub">BatchNorm, dropout, mixed precision (fp16/bf16), LR warmup, cosine decay, gradient clipping</div></div></div>
+    </div>
+    <div class="topics-header">Tools & Libraries</div>
+    <div class="tools-section"><div class="tools-flex">
+      <span class="tool-badge">PyTorch</span><span class="tool-badge">torchvision</span><span class="tool-badge">CUDA</span><span class="tool-badge">Weights & Biases</span><span class="tool-badge">HuggingFace Datasets</span><span class="tool-badge">TensorBoard</span><span class="tool-badge">Google Colab / Kaggle GPU</span>
+    </div></div>
+    <div class="topics-header">Recommended Resources</div>
+    <div class="resources-row">
+      <span class="resource-chip"><span class="rtype">Course</span> fast.ai Part 1 & 2</span>
+      <span class="resource-chip"><span class="rtype">Video</span> Karpathy: Neural Nets Zero to Hero</span>
+      <span class="resource-chip"><span class="rtype">Paper</span> Attention Is All You Need (Vaswani 2017)</span>
+      <span class="resource-chip"><span class="rtype">Book</span> Deep Learning — Goodfellow et al.</span>
+    </div>
+    <div class="deliverables">
+      <span class="deliverable">Neural net from scratch in NumPy</span>
+      <span class="deliverable">Image classifier fine-tuned on custom data</span>
+      <span class="deliverable">Character-level language model (mini-GPT)</span>
+    </div>
+  </div>
+</div>
+
+<div class="connector"><div class="connector-dot"></div></div>
+
+<!-- PHASE 3 -->
+<div class="phase-card">
+  <div class="phase-sidebar">
+    <div>
+      <div class="phase-pill">Phase 03</div>
+      <div class="phase-title-side">LLMs, Generative AI & RAG</div>
+      <div class="phase-weeks">Weeks 7 – 9</div>
+      <div class="phase-difficulty">
+        <div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot"></div>
+      </div>
+    </div>
+    <div class="phase-num-large">3</div>
+  </div>
+  <div class="phase-main">
+    <p class="phase-desc">The defining skill of 2024–2025 AI engineering. Learn to use frontier models via API with precision, treat prompt engineering as a systematic discipline, build retrieval-augmented systems, and fine-tune open-source models efficiently on consumer hardware.</p>
+    <div class="topics-header">Core Topics</div>
+    <div class="topics-grid">
+      <div class="topic-row"><span class="topic-icon">🤖</span><div><div class="topic-name">LLM API Mastery</div><div class="topic-sub">OpenAI, Anthropic, Google APIs — structured outputs, tool/function calling, streaming, batching</div></div></div>
+      <div class="topic-row"><span class="topic-icon">💬</span><div><div class="topic-name">Prompt Engineering</div><div class="topic-sub">System prompts, chain-of-thought, few-shot, ReAct, self-consistency, XML structuring</div></div></div>
+      <div class="topic-row"><span class="topic-icon">📚</span><div><div class="topic-name">RAG Pipelines</div><div class="topic-sub">Chunking strategies, dense embeddings, BM25, hybrid search, reranking with cross-encoders</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🗄️</span><div><div class="topic-name">Vector Databases</div><div class="topic-sub">Pinecone, Chroma, Weaviate, pgvector — indexing, approximate nearest-neighbor, metadata filters</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🔧</span><div><div class="topic-name">Parameter-Efficient Fine-Tuning</div><div class="topic-sub">LoRA, QLoRA, PEFT library — adapter layers, quantization (GGUF, GPTQ, AWQ) for 1-GPU training</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🌐</span><div><div class="topic-name">Open-Source LLMs</div><div class="topic-sub">Llama 3.1, Mistral/Mixtral, Qwen2.5, Phi-3/4 — local inference with Ollama, llama.cpp, vLLM</div></div></div>
+    </div>
+    <div class="topics-header">Tools & Libraries</div>
+    <div class="tools-section"><div class="tools-flex">
+      <span class="tool-badge">LangChain</span><span class="tool-badge">LlamaIndex</span><span class="tool-badge">HuggingFace Transformers</span><span class="tool-badge">ChromaDB</span><span class="tool-badge">Ollama</span><span class="tool-badge">PEFT</span><span class="tool-badge">Unsloth</span><span class="tool-badge">OpenAI SDK</span><span class="tool-badge">Anthropic SDK</span>
+    </div></div>
+    <div class="topics-header">Recommended Resources</div>
+    <div class="resources-row">
+      <span class="resource-chip"><span class="rtype">Course</span> DeepLearning.AI Short Courses (LangChain, RAG)</span>
+      <span class="resource-chip"><span class="rtype">Docs</span> Anthropic Prompt Engineering Guide</span>
+      <span class="resource-chip"><span class="rtype">Paper</span> LoRA: Low-Rank Adaptation (Hu et al. 2021)</span>
+      <span class="resource-chip"><span class="rtype">Repo</span> Unsloth fine-tuning notebooks</span>
+    </div>
+    <div class="deliverables">
+      <span class="deliverable">Production-grade RAG chatbot</span>
+      <span class="deliverable">Fine-tuned domain-specific model on HuggingFace</span>
+      <span class="deliverable">Prompt library with automated evals</span>
+    </div>
+  </div>
+</div>
+
+<div class="connector"><div class="connector-dot"></div></div>
+
+<!-- PHASE 4 -->
+<div class="phase-card">
+  <div class="phase-sidebar">
+    <div>
+      <div class="phase-pill">Phase 04</div>
+      <div class="phase-title-side">MLOps & Production Deployment</div>
+      <div class="phase-weeks">Weeks 10 – 12</div>
+      <div class="phase-difficulty">
+        <div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot"></div>
+      </div>
+    </div>
+    <div class="phase-num-large">4</div>
+  </div>
+  <div class="phase-main">
+    <p class="phase-desc">Prototypes don't get you hired — shipped systems do. Learn how ML models are containerized, deployed, versioned, and monitored in real production environments. Understand the engineering discipline that keeps AI products reliable at scale.</p>
+    <div class="topics-header">Core Topics</div>
+    <div class="topics-grid">
+      <div class="topic-row"><span class="topic-icon">🐳</span><div><div class="topic-name">Containerization</div><div class="topic-sub">Docker for ML — multi-stage builds, GPU-enabled containers (nvidia-docker), Docker Compose</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🚀</span><div><div class="topic-name">Model Serving</div><div class="topic-sub">FastAPI inference endpoints, BentoML, TorchServe, vLLM for high-throughput LLM serving</div></div></div>
+      <div class="topic-row"><span class="topic-icon">📈</span><div><div class="topic-name">Experiment Tracking</div><div class="topic-sub">MLflow — experiment management, model registry, artifact storage, run comparison</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🔄</span><div><div class="topic-name">CI/CD for ML</div><div class="topic-sub">GitHub Actions pipelines, pytest for models, DVC for data/model versioning, pre-commit hooks</div></div></div>
+      <div class="topic-row"><span class="topic-icon">☁️</span><div><div class="topic-name">Cloud ML Platforms</div><div class="topic-sub">AWS SageMaker, GCP Vertex AI — managed training jobs, endpoints, spot instances, autoscaling</div></div></div>
+      <div class="topic-row"><span class="topic-icon">👁️</span><div><div class="topic-name">Monitoring & Observability</div><div class="topic-sub">Data/prediction drift with Evidently AI, latency/throughput metrics, Prometheus + Grafana dashboards</div></div></div>
+    </div>
+    <div class="topics-header">Tools & Libraries</div>
+    <div class="tools-section"><div class="tools-flex">
+      <span class="tool-badge">Docker</span><span class="tool-badge">FastAPI</span><span class="tool-badge">MLflow</span><span class="tool-badge">DVC</span><span class="tool-badge">GitHub Actions</span><span class="tool-badge">vLLM</span><span class="tool-badge">Evidently AI</span><span class="tool-badge">Prometheus</span><span class="tool-badge">AWS SageMaker</span>
+    </div></div>
+    <div class="topics-header">Recommended Resources</div>
+    <div class="resources-row">
+      <span class="resource-chip"><span class="rtype">Book</span> Designing ML Systems — Chip Huyen</span>
+      <span class="resource-chip"><span class="rtype">Course</span> MLOps Zoomcamp (DataTalks.Club)</span>
+      <span class="resource-chip"><span class="rtype">Docs</span> vLLM documentation</span>
+      <span class="resource-chip"><span class="rtype">Blog</span> Evidently AI ML monitoring guides</span>
+    </div>
+    <div class="deliverables">
+      <span class="deliverable">Dockerized model inference API (public)</span>
+      <span class="deliverable">Automated ML CI/CD pipeline</span>
+      <span class="deliverable">Live monitoring dashboard</span>
+    </div>
+  </div>
+</div>
+
+<div class="connector"><div class="connector-dot"></div></div>
+
+<!-- PHASE 5 -->
+<div class="phase-card">
+  <div class="phase-sidebar">
+    <div>
+      <div class="phase-pill">Phase 05</div>
+      <div class="phase-title-side">AI Agents & Agentic Systems</div>
+      <div class="phase-weeks">Weeks 13 – 15</div>
+      <div class="phase-difficulty">
+        <div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div>
+      </div>
+    </div>
+    <div class="phase-num-large">5</div>
+  </div>
+  <div class="phase-main">
+    <p class="phase-desc">The current frontier. Agentic AI systems — models that plan, use tools, and execute multi-step tasks — are the dominant paradigm for complex AI applications in 2025. Learn to build, evaluate, and safely deploy them without losing control.</p>
+    <div class="topics-header">Core Topics</div>
+    <div class="topics-grid">
+      <div class="topic-row"><span class="topic-icon">🧠</span><div><div class="topic-name">Agent Architectures</div><div class="topic-sub">ReAct, Plan-and-Execute, Reflexion, MCTS-based planning, scratchpad reasoning patterns</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🛠️</span><div><div class="topic-name">Tool Use & MCP</div><div class="topic-sub">Function calling, Model Context Protocol (Anthropic), browser/code/search/filesystem tools</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🕸️</span><div><div class="topic-name">Multi-Agent Systems</div><div class="topic-sub">LangGraph stateful graphs, AutoGen conversations, CrewAI — orchestrator/worker patterns</div></div></div>
+      <div class="topic-row"><span class="topic-icon">💾</span><div><div class="topic-name">Agent Memory</div><div class="topic-sub">Short-term (context window), long-term (vector store), episodic vs semantic vs procedural memory</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🔒</span><div><div class="topic-name">Safety & Reliability</div><div class="topic-sub">Prompt injection defenses, sandboxed code execution, human-in-the-loop checkpoints, error recovery</div></div></div>
+      <div class="topic-row"><span class="topic-icon">📏</span><div><div class="topic-name">Evals & Benchmarking</div><div class="topic-sub">LLM-as-judge, custom eval harnesses, GAIA/SWE-bench style task benchmarks, regression tracking</div></div></div>
+    </div>
+    <div class="topics-header">Tools & Libraries</div>
+    <div class="tools-section"><div class="tools-flex">
+      <span class="tool-badge">LangGraph</span><span class="tool-badge">AutoGen</span><span class="tool-badge">CrewAI</span><span class="tool-badge">MCP SDK</span><span class="tool-badge">OpenAI Evals</span><span class="tool-badge">Inspect AI</span><span class="tool-badge">Playwright</span><span class="tool-badge">E2B Sandboxes</span>
+    </div></div>
+    <div class="topics-header">Recommended Resources</div>
+    <div class="resources-row">
+      <span class="resource-chip"><span class="rtype">Paper</span> ReAct: Synergizing Reasoning & Acting</span>
+      <span class="resource-chip"><span class="rtype">Course</span> DeepLearning.AI: AI Agents in LangGraph</span>
+      <span class="resource-chip"><span class="rtype">Docs</span> LangGraph documentation & tutorials</span>
+      <span class="resource-chip"><span class="rtype">Paper</span> GAIA Benchmark (Mialon et al. 2023)</span>
+    </div>
+    <div class="deliverables">
+      <span class="deliverable">Multi-tool autonomous research agent</span>
+      <span class="deliverable">Custom eval suite (50+ test cases)</span>
+      <span class="deliverable">Agent safety red-team write-up</span>
+    </div>
+  </div>
+</div>
+
+<div class="connector"><div class="connector-dot"></div></div>
+
+<!-- PHASE 6 -->
+<div class="phase-card">
+  <div class="phase-sidebar">
+    <div>
+      <div class="phase-pill">Phase 06</div>
+      <div class="phase-title-side">Capstone Project & Career Launch</div>
+      <div class="phase-weeks">Weeks 16 – 18</div>
+      <div class="phase-difficulty">
+        <div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div><div class="diff-dot on"></div>
+      </div>
+    </div>
+    <div class="phase-num-large">6</div>
+  </div>
+  <div class="phase-main">
+    <p class="phase-desc">Synthesize all six phases into one end-to-end flagship project you'd genuinely want to use. Ship it publicly, document it obsessively, and present it — this is the artefact that opens interview conversations and demonstrates you can build, not just learn.</p>
+    <div class="topics-header">Core Topics</div>
+    <div class="topics-grid">
+      <div class="topic-row"><span class="topic-icon">🏗️</span><div><div class="topic-name">End-to-End AI Product</div><div class="topic-sub">Model + API backend + frontend UI + monitoring — integrated, deployed, publicly accessible</div></div></div>
+      <div class="topic-row"><span class="topic-icon">📐</span><div><div class="topic-name">ML System Design</div><div class="topic-sub">Trade-off reasoning: latency vs accuracy, cost vs quality, scalability, data flywheel thinking</div></div></div>
+      <div class="topic-row"><span class="topic-icon">✍️</span><div><div class="topic-name">Technical Writing</div><div class="topic-sub">Architecture blog post, detailed README with diagrams, results analysis, demo video walkthrough</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🌐</span><div><div class="topic-name">Portfolio & Personal Brand</div><div class="topic-sub">GitHub showcase, HuggingFace model/space, personal site, LinkedIn profile optimized for roles</div></div></div>
+      <div class="topic-row"><span class="topic-icon">💼</span><div><div class="topic-name">Interview Preparation</div><div class="topic-sub">ML system design rounds, LeetCode + ML coding (numpy/pandas ops), STAR behavioral framework</div></div></div>
+      <div class="topic-row"><span class="topic-icon">🤝</span><div><div class="topic-name">Open Source Contribution</div><div class="topic-sub">Merge a meaningful PR into LangChain, HuggingFace Transformers, or a mid-tier ML project</div></div></div>
+    </div>
+    <div class="topics-header">Skills Demonstrated</div>
+    <div class="tools-section"><div class="tools-flex">
+      <span class="tool-badge">Full-Stack Deployment</span><span class="tool-badge">Technical Writing</span><span class="tool-badge">ML System Design</span><span class="tool-badge">Open Source Git</span><span class="tool-badge">Demo Presentation</span><span class="tool-badge">Cost Optimization</span>
+    </div></div>
+    <div class="topics-header">Recommended Resources</div>
+    <div class="resources-row">
+      <span class="resource-chip"><span class="rtype">Book</span> Designing ML Systems — Chip Huyen</span>
+      <span class="resource-chip"><span class="rtype">Guide</span> ML System Design Interview (Educative.io)</span>
+      <span class="resource-chip"><span class="rtype">Blog</span> applied-ml.com — Eugene Yan</span>
+    </div>
+    <div class="deliverables">
+      <span class="deliverable">Deployed public AI product</span>
+      <span class="deliverable">Published technical blog post</span>
+      <span class="deliverable">Open source PR merged</span>
+      <span class="deliverable">Portfolio site live</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /phases -->
+</div>
+
+<!-- PRINCIPLES -->
+<div style="margin-top:72px;">
+<div class="section-label">Intern Success Principles</div>
+<div class="principles-grid">
+  <div class="principle"><div class="prin-num">01</div><div class="prin-title">Build, Don't Just Read</div><div class="prin-body">Every concept you read about should become code within 48 hours. Passive learning creates an illusion of competence that collapses under interview pressure.</div></div>
+  <div class="principle"><div class="prin-num">02</div><div class="prin-title">Understand the Why</div><div class="prin-body">Don't just know that dropout prevents overfitting — know why, mathematically. First-principles understanding lets you debug when things break in unexpected ways.</div></div>
+  <div class="principle"><div class="prin-num">03</div><div class="prin-title">Ship Weekly</div><div class="prin-body">A small deployed thing beats a perfect half-finished thing. Build the habit of shipping early. Momentum compounds; perfectionism stalls careers before they start.</div></div>
+  <div class="principle"><div class="prin-num">04</div><div class="prin-title">Cost & Latency Are Features</div><div class="prin-body">In production, a model that's 2% less accurate but 10× cheaper and 50ms faster often wins. Think like an engineer, not just a researcher chasing benchmark scores.</div></div>
+  <div class="principle"><div class="prin-num">05</div><div class="prin-title">Read Original Papers</div><div class="prin-body">Blog posts summarize; papers contain. Read "Attention Is All You Need", the LoRA paper, the RAG paper — primary sources build understanding blogs cannot.</div></div>
+  <div class="principle"><div class="prin-num">06</div><div class="prin-title">Document Everything</div><div class="prin-body">Log your experiments. Write up your failures. The engineer who can explain what they tried and why it didn't work is far more hireable than one who can't.</div></div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">AI INTERN ROADMAP · 2025 EDITION · 18 WEEKS · 6 PHASES</div>
+  <div class="footer-right">Foundations → Deep Learning → LLMs → MLOps → Agents → Capstone</div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+const cards = document.querySelectorAll('.phase-card');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationDelay = '0s';
+      entry.target.classList.add('visible');
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.06 });
+cards.forEach(c => obs.observe(c));
+</script>
+</body>
+</html>
